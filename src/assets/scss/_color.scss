@@ -1,0 +1,36 @@
+:root {
+    --concord           : #7b7b7b;
+    --dark-jungle-green : #212121;
+    --onyx              : #0F0F0F;
+    --malachite         : #1ED760;
+    --red               : #f00;
+    --thunder           : #303030;
+    --white             : #FFFFFF;
+    --white-01          : #ffffff1a;
+    --white-02          : #ffffff33;
+}
+
+
+// Background color
+.bg-onyx                { background-color: var(--onyx); }
+.bg-malachite           { background-color: var(--malachite); }
+.bg-dark-jungle-green   { background-color: var(--dark-jungle-green); }
+.bg-white-01            { background-color: var(--white-01); }
+
+
+// Text color
+.text-malachite { color: var(--malachite); }
+
+
+// Border color
+.border-thunder {
+    border-color: var(--thunder) !important;
+}
+
+.border-white {
+    border-color: var(--white);
+}
+
+.border-white-02 {
+    border-color: var(--white-02) !important;
+}

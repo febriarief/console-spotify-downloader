@@ -1,0 +1,90 @@
+<div class="mt-4 mx-4 row">
+    <div class="col-md-8">
+        <form>
+            <label for="url" class="mb-2 f12 text-white">Track Url:</label>
+            <div class="position-relative">
+                <input type="text" autocomplete="off" class="pe-5 form-control spotify-input-search px-3 border-thunder" id="url" name="url" [(ngModel)]="form.url" placeholder="https://open.spotify.com/track/...."/>
+                <div class="position-absolute" style="top:6px;right:16px">
+                    <i role="button" class="fa-light fa-paste fa-lg text-white" matTooltip="Paste link" matTooltipPosition="right" (click)="pasteLink()"></i>
+                </div>
+            </div>
+
+            <button class="mt-3 px-3 btn bg-malachite f14 text-white" style="border-radius:20px" type="button" (click)="searchTrack()">
+                <span [hidden]="loading.search_track">Search Track</span>
+                <span [hidden]="!loading.search_track">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    searching track ...
+                </span>
+            </button>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <div class="p-3 border border-thunder rounded">
+            <span class="f14 text-white">Running queue(s):</span>
+            <span class="ms-2 roboto-bold f14 text-malachite">{{ queueNumber }}</span>
+
+            <div class="mt-3 f12 text-white" style="opacity:0.6">
+                To keep the server running safely and to avoid being banned from Spotify, we enforce a queue for each downloaded track.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showResult" class="mt-5 p-4 bg-white-01 rounded">
+    <div class="f18 text-white">Result Track:</div>
+
+    <div class="mt-4 d-flex">
+        <div class="me-3">
+            <img class="rounded" [src]="resultTrack.image_url" width="250px"/>
+        </div>
+
+        <div class="flex-fill">
+            <div class="f16 text-white text-wrap">{{ resultTrack.artist_name }}</div>
+            <div class="f14 text-white text-wrap" style="opacity:0.8">{{ resultTrack.audio_name }}</div>
+            
+            <!-- Request download -->
+            <button *ngIf="showRequestDownloadButton" class="mt-3 px-3 btn bg-malachite f14 text-white" style="border-radius:20px" type="button" (click)="requestDownload()">
+                <span [hidden]="loading.request_download">Request Download</span>
+                <span [hidden]="!loading.request_download">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    requesting ...
+                </span>
+            </button>
+            
+            <!-- Queue download -->
+            <div *ngIf="downloadInQueue" class="mt-3">
+                <div class="mb-2 fst-italic f12 text-white blink-text" style="opacity:.6">Your request is in queue number {{ queueNumber }}</div>
+                <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+            </div>
+
+            <!-- Process to download (from Spotify to server) -->
+            <button *ngIf="showProcessDownloadButton" class="mt-3 px-3 btn bg-malachite f14 text-white" style="border-radius:20px" type="button" (click)="processDownload()">
+                <span [hidden]="loading.process_download">Processing Download</span>
+                <span [hidden]="!loading.process_download">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    processing ...
+                </span>
+            </button>
+
+            <!-- Download in progress -->
+            <div *ngIf="downloadInProgress" class="mt-3">
+                <div class="mb-2 fst-italic f12 text-white blink-text" style="opacity:.6">{{ downloadMessage }}</div>
+                <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+            </div>
+
+            <!-- Download track locally -->
+            <ng-container *ngIf="showDownloadButton && !downloadInQueue">
+                <div class="mt-3 f14 text-white text-wrap" style="opacity:0.8">Your file is ready to download!</div>
+
+                <button class="mt-3 px-3 btn bg-malachite f14 text-white" style="border-radius:20px" type="button" (click)="downloadFile()">
+                    <span [hidden]="loading.download_track">Download Track</span>
+                    <span [hidden]="!loading.download_track">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        downloading ...
+                    </span>
+                </button>
+            </ng-container>
+        </div>
+    </div>
+</div>
