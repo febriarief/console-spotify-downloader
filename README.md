@@ -58,7 +58,7 @@ npm run build
 This web console is not an official product of Spotify. Users are advised to use it responsibly and at their own risk. Respect copyright and licensing agreements when downloading and using Spotify tracks.
 
 ## Contribution
-Feel free to contribute to the development of this Spotify Track Downloader API. Fork the repository, make your changes, and submit a pull request.
+Feel free to contribute to the development of this Spotify Downloader Web Console. Fork the repository, make your changes, and submit a pull request.
 
 ## License
 This application is also licensed under the [MIT License](https://opensource.org/licenses/MIT), promoting an open and collaborative development environment.
